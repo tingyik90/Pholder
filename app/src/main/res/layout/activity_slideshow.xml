@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.base.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slideshowActivity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".slideshow.SlideshowActivity"
+    tools:ignore="ContentDescription">
+
+    <com.dokidevs.pholder.base.LockableViewPager
+        android:id="@+id/slideshowActivity_lockableViewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slideshowActivity_actionLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:id="@+id/slideshowActivity_action_share"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="@dimen/icon_click_area"
+            android:layout_height="@dimen/icon_click_area"
+            android:elevation="@dimen/grid_2x"
+            android:scaleType="centerInside"
+            android:transitionName="slideshowActivity_action_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/slideshowActivity_action_info"
+            app:srcCompat="@drawable/ic_share_white_24dp" />
+
+        <ImageButton
+            android:id="@+id/slideshowActivity_action_info"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="@dimen/icon_click_area"
+            android:layout_height="@dimen/icon_click_area"
+            android:elevation="@dimen/grid_2x"
+            android:scaleType="centerInside"
+            android:transitionName="slideshowActivity_action_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toRightOf="@+id/slideshowActivity_action_share"
+            app:layout_constraintRight_toLeftOf="@+id/slideshowActivity_action_delete"
+            app:srcCompat="@drawable/ic_info_white_24dp" />
+
+        <ImageButton
+            android:id="@+id/slideshowActivity_action_delete"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="@dimen/icon_click_area"
+            android:layout_height="@dimen/icon_click_area"
+            android:elevation="@dimen/grid_2x"
+            android:scaleType="centerInside"
+            android:transitionName="slideshowActivity_action_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toRightOf="@+id/slideshowActivity_action_info"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/ic_delete_white_24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.dokidevs.pholder.base.InsetsConstraintLayout>

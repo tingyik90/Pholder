@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoItemLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_two_line_height"
+    tools:ignore="ContentDescription,RtlHardcoded">
+
+    <ImageView
+        android:id="@+id/infoItemLayout_icon"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/list_horizontal_margin"
+        android:scaleType="centerInside"
+        android:tint="?iconColorActive"
+        android:tintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_image_white_24dp" />
+
+    <TextView
+        android:id="@+id/infoItemLayout_text_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_text_left_margin"
+        android:layout_marginRight="@dimen/list_horizontal_margin"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:maxLines="3"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_subheading"
+        app:layout_constraintBottom_toTopOf="@+id/infoItemLayout_text_secondary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="2976 x 3968" />
+
+    <TextView
+        android:id="@+id/infoItemLayout_text_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_text_left_margin"
+        android:layout_marginRight="@dimen/list_horizontal_margin"
+        android:fontFamily="@font/roboto"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/text_subheading"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoItemLayout_text_primary"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="4.0 MB"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

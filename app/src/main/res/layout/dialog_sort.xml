@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sortDialog_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="RtlHardcoded,UselessParent">
+
+    <!-- Need to use relativeLayout to fill dialog space -->
+    <ScrollView
+        android:id="@+id/sortDialog_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:fadeScrollbars="false"
+        android:scrollbarFadeDuration="0"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:id="@+id/sortDialog_sortLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sortDialog_folder_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+                android:layout_marginTop="@dimen/grid_2x"
+                android:layout_marginRight="@dimen/dialog_horizontal_margin"
+                android:layout_marginBottom="@dimen/grid_1x"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/sortDialog_folder_title"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_subheading" />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/sortDialog_folder_radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+                android:layout_marginRight="@dimen/dialog_horizontal_margin"
+                android:layout_marginBottom="@dimen/grid_1x"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/sortDialog_folder_date_asc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_date_asc" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_folder_date_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_date_desc" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_folder_name_asc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_name_asc"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_folder_name_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_name_desc" />
+
+            </RadioGroup>
+
+            <View
+                android:id="@+id/sortDialog_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/grid_1x"
+                android:layout_marginBottom="@dimen/grid_1x"
+                android:background="?android:listDivider" />
+
+            <TextView
+                android:id="@+id/sortDialog_media_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+                android:layout_marginTop="@dimen/grid_1x"
+                android:layout_marginRight="@dimen/dialog_horizontal_margin"
+                android:layout_marginBottom="@dimen/grid_1x"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/sortDialog_media_title"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_subheading" />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/sortDialog_media_radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+                android:layout_marginRight="@dimen/dialog_horizontal_margin"
+                android:layout_marginBottom="@dimen/grid_1x"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/sortDialog_media_date_asc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_date_asc" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_media_date_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_date_desc"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_media_name_asc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_name_asc" />
+
+                <RadioButton
+                    android:id="@+id/sortDialog_media_name_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sortDialog_name_desc" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/grid_1x"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sortDialog_button_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dialog_button_height"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/grid_1x"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:minWidth="@dimen/dialog_button_min_width"
+                    android:paddingLeft="@dimen/dialog_button_padding"
+                    android:paddingRight="@dimen/dialog_button_padding"
+                    android:text="@android:string/cancel"
+                    android:textAllCaps="true"
+                    android:textColor="?colorAccent"
+                    android:textSize="@dimen/text_button" />
+
+                <TextView
+                    android:id="@+id/sortDialog_button_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dialog_button_height"
+                    android:layout_gravity="right"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:minWidth="@dimen/dialog_button_min_width"
+                    android:paddingLeft="@dimen/dialog_button_padding"
+                    android:paddingRight="@dimen/dialog_button_padding"
+                    android:text="@android:string/ok"
+                    android:textAllCaps="true"
+                    android:textColor="?colorAccent"
+                    android:textSize="@dimen/text_button" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

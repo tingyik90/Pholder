@@ -1,11 +1,89 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- dark theme -->
+    <!-- Make theme's windowBackground black to avoid flickering at statusBar and navigationBar during transition -->
+    <!-- As such, need to set view background individually, since they are usually transparent -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:listDivider">@color/dividerWhite</item>
+        <item name="android:navigationBarColor">@color/navigationBarDefault</item>
+        <item name="android:statusBarColor">@color/statusBarDefault</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="backgroundColor">@color/backgroundBlack</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="iconColorActive">@color/iconWhiteActive</item>
+        <item name="iconColorActiveUnfocused">@color/iconWhiteActiveUnfocused</item>
+        <item name="iconColorInactive">@color/iconWhiteInactive</item>
+        <item name="textColorHint">@color/textWhiteHint</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Translucent" parent="AppTheme.NoActionBar">
+        <item name="android:navigationBarColor">@color/navigationBarTranslucent</item>
+        <item name="android:statusBarColor">@color/statusBarTranslucent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:listDivider">@color/dividerWhite</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="iconColorActive">@color/iconWhiteActive</item>
+        <item name="iconColorActiveUnfocused">@color/iconWhiteActiveUnfocused</item>
+        <item name="iconColorInactive">@color/iconWhiteInactive</item>
+    </style>
+
+    <!-- Only used by SettingsActivity, can directly set windowBackground -->
+    <style name="AppPreferenceTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/backgroundBlack</item>
+    </style>
+
+    <!-- light theme -->
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:listDivider">@color/dividerBlack</item>
+        <item name="android:navigationBarColor">@color/navigationBarDefault</item>
+        <item name="android:statusBarColor">@color/statusBarDefault</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="backgroundColor">@color/backgroundWhite</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="iconColorActive">@color/iconBlackActive</item>
+        <item name="iconColorActiveUnfocused">@color/iconBlackActiveUnfocused</item>
+        <item name="iconColorInactive">@color/iconBlackInactive</item>
+        <item name="textColorHint">@color/textBlackHint</item>
+    </style>
+
+    <style name="AppTheme.Light.NoActionBar" parent="AppTheme.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Light.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:listDivider">@color/dividerBlack</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="iconColorActive">@color/iconBlackActive</item>
+        <item name="iconColorActiveUnfocused">@color/iconBlackActiveUnfocused</item>
+        <item name="iconColorInactive">@color/iconBlackInactive</item>
+    </style>
+
+    <!-- Only used by SettingsActivity, can directly set windowBackground -->
+    <style name="AppPreferenceTheme.Light" parent="AppTheme.Light">
+        <item name="android:windowBackground">@color/backgroundWhite</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
     </style>
 
 </resources>
+

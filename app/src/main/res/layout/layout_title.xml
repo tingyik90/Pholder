@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.gallery.layout.TitleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/titleLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dateLayout_height"
+    android:clipToPadding="false"
+    android:paddingLeft="@dimen/grid_1x"
+    android:paddingRight="@dimen/grid_1x"
+    tools:ignore="RtlHardcoded,contentDescription">
+
+    <TextView
+        android:id="@+id/titleLayout_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="7 Aug 1990" />
+
+    <ImageView
+        android:id="@+id/titleLayout_tickBox"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_tick_circle_empty_white"
+        android:elevation="@dimen/grid_1x"
+        android:padding="@dimen/grid_quarter"
+        android:tint="@color/colorPrimaryDark"
+        android:tintMode="src_in"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</com.dokidevs.pholder.gallery.layout.TitleLayout>

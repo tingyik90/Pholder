@@ -1,0 +1,54 @@
+<com.dokidevs.pholder.base.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/galleryBaseFragment_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="KeyboardInaccessibleWidget">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/galleryBaseFragment_swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Wrap the recyclerView and emptyView in frameLayout to enable swipe refresh even in empty view -->
+        <!-- See https://stackoverflow.com/a/23424655/3584439 -->
+        <FrameLayout
+            android:id="@+id/galleryBaseFragment_swipeRefreshLayout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/galleryBaseFragment_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/grid_1x"
+                android:paddingRight="@dimen/grid_1x"
+                tools:itemCount="20"
+                tools:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/layout_folder"
+                tools:spanCount="2" />
+
+            <TextView
+                android:id="@+id/galleryBaseFragment_emptyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/grid_6x"
+                android:clickable="true"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/galleryBaseFragment_emptyView_photo"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_body"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </FrameLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</com.dokidevs.pholder.base.InsetsConstraintLayout>

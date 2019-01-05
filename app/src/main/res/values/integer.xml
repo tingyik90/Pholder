@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- animation -->
+    <integer name="animation_duration_entry_medium">250</integer>
+    <integer name="animation_duration_entry_long">300</integer>
+    <integer name="animation_duration_exit_medium">200</integer>
+    <integer name="animation_duration_exit_long">250</integer>
+    <integer name="animation_duration_shape_change">200</integer>
+    <integer name="animation_duration_detail">500</integer>
+    <integer name="animation_duration_max">400</integer>
+
+</resources>

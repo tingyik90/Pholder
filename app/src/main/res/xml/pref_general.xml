@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_category_title_theme">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_color_lens_white_24dp"
+            android:key="PREF_IS_DARK_THEME"
+            android:title="@string/pref_is_dark_theme_title" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_cancel_white_24dp"
+            android:key="PREF_USE_EXIT_CONFIRMATION"
+            android:summary="@string/pref_use_exit_confirmation_summary"
+            android:title="@string/pref_use_exit_confirmation_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_title_directories">
+
+        <!-- Use %s and the list will show the selected value as summary -->
+        <!-- See https://stackoverflow.com/a/24772748/3584439 -->
+        <ListPreference
+            android:defaultValue="PREF_LIST_BROWSING_MODE_ALBUM"
+            android:entries="@array/pref_list_browsing_mode_entries"
+            android:entryValues="@array/pref_list_browsing_mode_entryValues"
+            android:icon="@drawable/ic_image_white_24dp"
+            android:key="PREF_LIST_BROWSING_MODE"
+            android:summary="%s"
+            android:title="@string/pref_list_browsing_mode_title" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_star_white_24dp"
+            android:key="PREF_AUTOMATICALLY_STAR_CREATED_FOLDER"
+            android:title="@string/pref_automatically_star_created_folder_title" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_video_white_24dp"
+            android:key="PREF_SHOW_ALL_VIDEOS_FOLDER"
+            android:title="@string/pref_show_all_videos_folder_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_folder_white_24dp"
+            android:key="PREF_SHOW_EMPTY_FOLDERS"
+            android:title="@string/pref_show_empty_folders_title" />
+
+        <Preference
+            android:icon="@drawable/ic_add_circle_white_24dp"
+            android:key="PREF_ARRAY_INCLUDED_FOLDER_PATHS"
+            android:title="@string/pref_included_folder_paths_title" />
+
+        <Preference
+            android:icon="@drawable/ic_remove_circle_white_24dp"
+            android:key="PREF_ARRAY_EXCLUDED_FOLDER_PATHS"
+            android:title="@string/pref_excluded_folder_paths_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_title_media">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_gif_white_24dp"
+            android:key="PREF_ANIMATE_GIF"
+            android:title="@string/pref_animate_gif_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_camera">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_camera_white_24dp"
+            android:key="PREF_SHOW_CAMERA_BUTTONS"
+            android:title="@string/pref_show_camera_buttons_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dependency="PREF_SHOW_CAMERA_BUTTONS"
+            android:icon="@drawable/ic_party_mode_white_24dp"
+            android:key="PREF_USE_FULL_NATIVE_CAMERA"
+            android:summary="@string/pref_use_full_native_camera_summary"
+            android:title="@string/pref_use_full_native_camera_title" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="PREF_SHOW_CAMERA_BUTTONS"
+            android:icon="@drawable/ic_place_white_24dp"
+            android:key="PREF_ENABLE_CAMERA_LOCATION"
+            android:title="@string/pref_enable_camera_location_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

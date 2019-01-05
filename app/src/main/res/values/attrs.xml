@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="iconColorActive" format="color" />
+    <attr name="iconColorActiveUnfocused" format="color" />
+    <attr name="iconColorInactive" format="color" />
+    <attr name="backgroundColor" format="color" /> <!-- to differentiate from android:colorBackground when we want to apply to one view only -->
+    <attr name="textColorHint" format="color" /> <!-- background="?android:textColorHint" will crash app. Use this instead -->
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_two_line_height_tight"
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription,RtlHardcoded">
+
+    <TextView
+        android:id="@+id/directoryListItemLayout_path"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/list_horizontal_margin"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:maxLines="3"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_list_dense"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/directoryListItemLayout_delete"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="/DCIM/Camera" />
+
+    <ImageView
+        android:id="@+id/directoryListItemLayout_delete"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/grid_1x"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_delete_white_24dp"
+        android:tint="?iconColorActive"
+        android:tintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.dialog.folderpicker.FolderPickerItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folderPickerItemLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_two_line_height"
+    tools:ignore="ContentDescription,RtlHardcoded,KeyboardInaccessibleWidget">
+
+    <ImageView
+        android:id="@+id/folderPickerItemLayout_placeHolder"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_marginLeft="@dimen/list_horizontal_margin"
+        android:clickable="false"
+        android:scaleType="centerInside"
+        android:tint="?iconColorActiveUnfocused"
+        android:tintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_folder_white_48dp" />
+
+    <ImageView
+        android:id="@+id/folderPickerItemLayout_icon"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_marginLeft="@dimen/list_horizontal_margin"
+        android:clickable="false"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/folderPickerItemLayout_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/list_text_left_margin"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:maxLines="2"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_subheading"
+        app:layout_constraintBottom_toTopOf="@+id/folderPickerItemLayout_count"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/folderPickerItemLayout_next"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_goneMarginRight="@dimen/list_horizontal_margin"
+        tools:text="Pholder" />
+
+    <TextView
+        android:id="@+id/folderPickerItemLayout_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/list_text_left_margin"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:clickable="false"
+        android:fontFamily="@font/roboto"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/text_subheading"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/folderPickerItemLayout_next"
+        app:layout_constraintTop_toBottomOf="@+id/folderPickerItemLayout_name"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_goneMarginRight="@dimen/list_horizontal_margin"
+        tools:text="3 folders" />
+
+    <ImageView
+        android:id="@+id/folderPickerItemLayout_next"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_margin="@dimen/grid_1x"
+        android:clickable="true"
+        android:scaleType="centerInside"
+        android:tint="?iconColorActive"
+        android:tintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_right_white_24dp" />
+
+</com.dokidevs.pholder.dialog.folderpicker.FolderPickerItemLayout>

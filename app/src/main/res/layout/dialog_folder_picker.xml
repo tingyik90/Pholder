@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folderPickerDialog_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription,RtlHardcoded">
+
+    <!-- Not sure why, but must wrap with RelativeLayout or else recyclerView will not take up remaining space -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/folderPickerDialog_backButton"
+            android:layout_width="@dimen/list_icon_size"
+            android:layout_height="@dimen/list_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/grid_1x"
+            android:scaleType="centerInside"
+            android:tint="?iconColorActive"
+            android:tintMode="src_in"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/folderPickerDialog_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white_24dp"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/folderPickerDialog_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/grid_1x"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical|left"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/text_title"
+            app:layout_constraintBottom_toTopOf="@+id/folderPickerDialog_list_divider_top"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="100"
+            app:layout_constraintLeft_toRightOf="@+id/folderPickerDialog_backButton"
+            app:layout_constraintRight_toLeftOf="@+id/folderPickerDialog_addButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_goneMarginLeft="@dimen/list_horizontal_margin"
+            app:layout_goneMarginRight="@dimen/list_horizontal_margin"
+            tools:text="Pholder" />
+
+        <ImageView
+            android:id="@+id/folderPickerDialog_addButton"
+            android:layout_width="@dimen/list_icon_size"
+            android:layout_height="@dimen/list_icon_size"
+            android:layout_margin="@dimen/grid_1x"
+            android:scaleType="centerInside"
+            android:tint="?iconColorActive"
+            android:tintMode="src_in"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toRightOf="@+id/folderPickerDialog_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_create_folder_white_24dp"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/folderPickerDialog_list_divider_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/grid_1x"
+            android:background="?android:listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/folderPickerDialog_recyclerView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/folderPickerDialog_title"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/folderPickerDialog_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fadeScrollbars="false"
+            android:scrollbars="vertical"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/folderPickerDialog_list_divider_bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/folderPickerDialog_list_divider_top"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_constraintVertical_weight="100"
+            tools:itemCount="10"
+            tools:listitem="@layout/layout_item_folder_picker" />
+
+        <TextView
+            android:id="@+id/folderPickerDialog_list_emptyView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/folderPickerDialog_list_emptyView"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/text_body"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/folderPickerDialog_recyclerView"
+            app:layout_constraintLeft_toLeftOf="@id/folderPickerDialog_recyclerView"
+            app:layout_constraintRight_toRightOf="@id/folderPickerDialog_recyclerView"
+            app:layout_constraintTop_toTopOf="@+id/folderPickerDialog_recyclerView" />
+
+        <View
+            android:id="@+id/folderPickerDialog_list_divider_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/divider_height"
+            android:background="?android:listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/folderPickerDialog_button_action"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/folderPickerDialog_recyclerView"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <TextView
+            android:id="@+id/folderPickerDialog_button_action"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_margin="@dimen/dialog_button_padding"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:minWidth="@dimen/dialog_button_min_width"
+            android:paddingLeft="@dimen/dialog_button_padding"
+            android:paddingRight="@dimen/dialog_button_padding"
+            android:text="@string/folderPickerDialog_action_here"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/folderPickerDialog_list_divider_bottom"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <TextView
+            android:id="@+id/folderPickerDialog_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dialog_button_height"
+            android:layout_margin="@dimen/dialog_button_padding"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:minWidth="@dimen/dialog_button_min_width"
+            android:paddingLeft="@dimen/dialog_button_padding"
+            android:paddingRight="@dimen/dialog_button_padding"
+            android:text="@string/folderPickerDialog_action_cancel"
+            android:textAllCaps="true"
+            android:textColor="?colorAccent"
+            android:textSize="@dimen/text_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/folderPickerDialog_button_action" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

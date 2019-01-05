@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/directoryListActivity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?backgroundColor"
+    android:orientation="vertical"
+    tools:context=".settings.DirectoryListActivity"
+    tools:menu="@menu/menu_directory_list">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/directoryListActivity_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/layout_item_directory_list" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

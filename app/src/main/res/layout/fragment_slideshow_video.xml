@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.base.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slideshowVideoFragment_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:ignore="ContentDescription,HardCodedText,RtlHardcoded">
+
+    <!-- Using this to avoid flicker / error with viewPager -->
+    <!-- Default VideoView is using SurfaceView which is not suitable with layout animation -->
+    <!-- However, need to wrap with a relativeLayout so that the video aspect ratio is kept -->
+    <!-- Constraint layout somehow stretch the video to fullscreen no matter that orientation -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.sprylab.android.widget.TextureVideoView
+            android:id="@+id/slideshowVideoFragment_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/slideshowVideoFragment_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/slideshowVideoFragment_playPause"
+        android:layout_width="@dimen/icon_click_area"
+        android:layout_height="@dimen/icon_click_area"
+        android:layout_margin="@dimen/grid_1x"
+        android:background="@drawable/bg_control_play_pause"
+        android:padding="@dimen/grid_half"
+        android:transitionName="slideshowVideoFragment_playPause"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_play_white_48dp" />
+
+    <ProgressBar
+        android:id="@+id/slideshowVideoFragment_progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/textWhiteSecondary"
+        android:indeterminateTintMode="src_in"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/slideshowVideoFragment_gradient_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/slideshowVideoFragment_gradient_bottom_height"
+        android:background="@drawable/bg_gradient_bottom_dark"
+        android:orientation="vertical"
+        android:transitionName="slideshowVideoFragment_gradient_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slideshowVideoFragment_seekBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/slideshowVideoFragment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_caption"
+            android:transitionName="slideshowVideoFragment_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/slideshowVideoFragment_seekBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- margin bottom inclusive of SlideshowActivity actionLayout -->
+        <SeekBar
+            android:id="@+id/slideshowVideoFragment_seekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:transitionName="slideshowVideoFragment_seekBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toRightOf="@+id/slideshowVideoFragment_time"
+            app:layout_constraintRight_toLeftOf="@+id/slideshowVideoFragment_duration"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/slideshowVideoFragment_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_caption"
+            android:transitionName="slideshowVideoFragment_duration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toRightOf="@+id/slideshowVideoFragment_seekBar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.dokidevs.pholder.base.InsetsConstraintLayout>

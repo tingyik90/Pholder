@@ -1,3 +1,167 @@
 <resources>
+
     <string name="app_name">Pholder</string>
+    <string name="alertDialog_browsing_mode_album_message">You are now using \"Album Mode\" which is similar to Google Photos.
+        \n\nWe have added some common \u2606 folders for you which appear at the top of this tab.
+        \n\nIf you are using Pholder to manage project photos, try out \"File Explorer Mode\" by changing \"Browsing Mode\" in Settings.</string>
+    <string name="alertDialog_browsing_mode_album_title">Welcome!</string>
+    <string name="alertDialog_browsing_mode_file_explorer_message">You are now using \"File Explorer Mode\" which is similar to browsing folders on PC.
+        \n\nYour \u2606 folders are shown in the first tab. Start browsing in the second tab!</string>
+    <string name="alertDialog_browsing_mode_file_explorer_title">Welcome!</string>
+    <string name="categoryLayout_category_folders">FOLDERS</string>
+    <string name="categoryLayout_category_media">MEDIA</string>
+    <string name="confirmationDialog_message_delete_media">Confirm to delete media? This cannot be undone!</string>
+    <string name="confirmationDialog_message_move_media">Confirm to move media?</string>
+    <string name="confirmationDialog_message_rename_folder">Confirm to rename?</string>
+    <string name="directoryListActivity_dialog_collision_excluded">You already included the following folders in Excluded Directory. Do you want to remove them?</string>
+    <string name="directoryListActivity_dialog_collision_included">You already included the following folders in Included Directory. Do you want to remove them?</string>
+    <string name="folderLayout_count_folder">folder</string>
+    <string name="folderLayout_count_folders">folders</string>
+    <string name="folderLayout_count_file">file</string>
+    <string name="folderLayout_count_files">files</string>
+    <string name="folderLayout_count_empty">0 item</string>
+    <string name="folderNameDialog_name_hint">Folder Name</string>
+    <string name="folderNameDialog_title_create">Create Folder</string>
+    <string name="folderNameDialog_title_rename">Rename Folder</string>
+    <string name="folderPickerDialog_action_cancel">@android:string/cancel</string>
+    <string name="folderPickerDialog_action_here">HERE</string>
+    <string name="folderPickerDialog_action_select">SELECT</string>
+    <string name="folderPickerDialog_list_emptyView">No subfolder is available here.</string>
+    <string name="galleryActivity_firstUpdate_done">Done!</string>
+    <string name="galleryActivity_firstUpdate_wait">Please wait while we update for the first time…</string>
+    <string name="galleryBaseFragment_emptyView_folder">"No folder available.\n\nClick the '+' button above to create folder."</string>
+    <string name="galleryBaseFragment_emptyView_photo">No media available.\n\nClick the camera button below to start.</string>
+    <string name="galleryBaseFragment_emptyView_star">No star folder found.\n\nStart marking your favourite folder for quick access!</string>
+    <string name="infoActivity_title">Info</string>
+    <string name="menu_createFolder">Create folder</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_folderInfo">Folder info</string>
+    <string name="menu_gridView">Grid View</string>
+    <string name="menu_listView">List View</string>
+    <string name="menu_moveTo">Move to</string>
+    <string name="menu_removeStarFolder">Remove star</string>
+    <string name="menu_rename">Rename</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_selectAll">Select all</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_sortBy">Sort by</string>
+    <string name="menu_starFolder">Star</string>
+    <string name="permissionDialog_gps_message">Pholder needs this permission to save GPS location of photo and video taken. Click OK to grant permission. Click CANCEL to not save GPS location.</string>
+    <string name="permissionDialog_writeAccess_message">Pholder needs this permission to display and take photos. Click OK to grant permission. Click CANCEL to quit Pholder.</string>
+    <string name="settingsActivity_title">Settings</string>
+    <string name="shareIntent_title">Share</string>
+    <string name="sortDialog_folder_title">Sort folder by</string>
+    <string name="sortDialog_media_title">Sort media by</string>
+    <string name="sortDialog_date_asc">Date (ascending)</string>
+    <string name="sortDialog_date_desc">Date (descending)</string>
+    <string name="sortDialog_name_asc">Name (ascending)</string>
+    <string name="sortDialog_name_desc">Name (descending)</string>
+    <string name="time_hours">hours</string>
+    <string name="time_hour">hour</string>
+    <string name="time_minutes">minutes</string>
+    <string name="time_minute">minute</string>
+    <string name="time_seconds">seconds</string>
+    <string name="time_second">second</string>
+    <string name="toast_camera_not_found">No camera was found! Please report this issue to DokiDevs.</string>
+    <string name="toast_camera_save_location_photo_post">"'."</string>
+    <string name="toast_camera_save_location_photo_pre">"Photo will be saved in '"</string>
+    <string name="toast_camera_save_location_video_post">"'."</string>
+    <string name="toast_camera_save_location_video_pre">"Video will be saved in '"</string>
+    <string name="toast_camera_gps_off">GPS location is turned off.</string>
+    <string name="toast_createFolder_failed">Unable to create folder. Please try again later.</string>
+    <string name="toast_createFolder_ok">Folder created.</string>
+    <string name="toast_createFolder_location_post">"'."</string>
+    <string name="toast_createFolder_location_pre">"The new folder will be created in '"</string>
+    <string name="toast_createFolder_warn_char">"| \? * &lt; \" : &gt; + [ ] / &apos; are not allowed for folder name."</string>
+    <string name="toast_createFolder_warn_empty">Folder name is empty!</string>
+    <string name="toast_createFolder_warn_exist_post">"' already exist!"</string>
+    <string name="toast_createFolder_warn_exist_pre">"'"</string>
+    <string name="toast_createFolder_warn_full_stop">Cannot begin a folder name with a full stop!</string>
+    <string name="toast_createFolder_warn_not_allowed">Cannot create folder here.</string>
+    <string name="toast_deleteFile_failed_post">"'. Please try again later."</string>
+    <string name="toast_deleteFile_failed_pre">"Unable to delete '"</string>
+    <string name="toast_deleteFile_file_failed">Unable to delete some files. Please make sure they are not used by other apps.</string>
+    <string name="toast_deleteFile_folder_failed">Unable to delete some folders. They might contain files other than photos and videos. Please delete them using file explorer.</string>
+    <string name="toast_deleteFile_ok_post">"' is deleted."</string>
+    <string name="toast_deleteFile_ok_pre">"'"</string>
+    <string name="toast_deleteFile_ok">Delete successful.</string>
+    <string name="toast_deleteFile_warn_system_not_allowed_post">"' is a system folder and cannot be deleted. Only the contents can be deleted."</string>
+    <string name="toast_deleteFile_warn_system_not_allowed_pre">"'"</string>
+    <string name="toast_exit_confirmation">Press back again to exit.</string>
+    <string name="toast_file_does_not_exist">This image/video no longer exists.</string>
+    <string name="toast_folder_path_post">"'."</string>
+    <string name="toast_folder_path_pre">"Folder path is '"</string>
+    <string name="toast_folderPicker_warn_root_not_allowed">Cannot select here!</string>
+    <string name="toast_google_play_services_not_available_map">Google Play Services is not available. Unable to show Google Map.</string>
+    <string name="toast_google_play_services_not_available_gps">Google Play Services is not available. GPS location will be disabled for camera.</string>
+    <string name="toast_imageFragment_load_failed">Image is broken. Unable to display this image.</string>
+    <string name="toast_move_failed">Unable to move some files. Please make sure there are no file with same name in destination folder.</string>
+    <string name="toast_move_failed_post">"'. Please try again later."</string>
+    <string name="toast_move_failed_pre">"Unable to move '"</string>
+    <string name="toast_move_ok">Move successful.</string>
+    <string name="toast_move_warn_exist_post">"' already exists in destination!"</string>
+    <string name="toast_move_warn_exist_pre">"'"</string>
+    <string name="toast_move_warn_self_post">"' into itself!"</string>
+    <string name="toast_move_warn_self_pre">"You cannot move '"</string>
+    <string name="toast_move_warn_system_not_allowed_post">"' is a system folder and cannot be moved."</string>
+    <string name="toast_move_warn_system_not_allowed_pre">"'"</string>
+    <string name="toast_rename_failed">Unable to rename some files. Please try again later.</string>
+    <string name="toast_rename_failed_post">"'. Please try again later."</string>
+    <string name="toast_rename_failed_pre">"Unable to rename '"</string>
+    <string name="toast_rename_ok">Rename successful.</string>
+    <string name="toast_rename_warn_system_not_allowed_post">"' is a system folder and cannot be renamed."</string>
+    <string name="toast_rename_warn_system_not_allowed_pre">"'"</string>
+    <string name="toast_startSlideshow_file_not_exist">This file no longer exists.</string>
+    <string name="toast_select_folder_image">Select a folder to save the photo.</string>
+    <string name="toast_select_folder_video">Select a folder to save the video.</string>
+    <string name="toast_startCamera_warn_root_not_allowed_image">Cannot save photo here. Choose a folder to take photo.</string>
+    <string name="toast_startCamera_warn_root_not_allowed_video">Cannot save video here. Choose a folder to take video.</string>
+    <string name="toast_videoFragment_play_failed">Video is broken. Unable to play this video.</string>
+    <string name="toolbar_title_albumFragment">Albums</string>
+    <string name="toolbar_title_dateFragment">All Media</string>
+    <string name="toolbar_title_folderFragment">File Explorer</string>
+    <string name="toolbar_title_starFragment">Starred Folders</string>
+    <string-array name="included_folder_paths_suggested">
+        <item>"Pholder"</item>
+    </string-array>
+    <string-array name="starred_folder_paths_suggested">
+        <item>"Pholder"</item>
+        <item>"Pictures/Messenger"</item>
+        <item>"Pictures/LINE"</item>
+        <item>"Pictures/Screenshots"</item>
+        <item>"WhatsApp/Media/WhatsApp Images"</item>
+        <item>"WhatsApp/Media/WhatsApp Video"</item>
+        <item>"DCIM/Camera"</item>
+    </string-array>
+
+    <!-- pref -->
+    <string name="pref_animate_gif_title">Animate Gif</string>
+    <string name="pref_automatically_star_created_folder_title">Automatically star new folder</string>
+    <string name="pref_use_exit_confirmation_summary">Press back twice to exit Pholder.</string>
+    <string name="pref_use_exit_confirmation_title">Exit confirmation</string>
+    <string name="pref_category_camera">Camera</string>
+    <string name="pref_category_title_directories">Directories</string>
+    <string name="pref_category_title_media">Media</string>
+    <string name="pref_category_title_theme">Theme</string>
+    <string name="pref_enable_camera_location_title">Enable camera GPS location</string>
+    <string name="pref_excluded_folder_paths_title">Excluded folders</string>
+    <string name="pref_included_folder_paths_title">Included folders</string>
+    <string name="pref_is_dark_theme_title">Enable dark theme</string>
+    <string name="pref_show_all_videos_folder_title">"Show 'All Videos' folder"</string>
+    <string name="pref_show_camera_buttons_title">Show camera buttons</string>
+    <string name="pref_show_empty_folders_title">Show empty folders</string>
+    <string name="pref_use_full_native_camera_summary">Use your native camera app.
+        The media taken will be saved to default location (e.g. DCIM).</string>
+    <string name="pref_use_full_native_camera_title">Use full native camera</string>
+    <string name="pref_list_browsing_mode_title">Browsing Mode</string>
+    <string-array name="pref_list_browsing_mode_entries">
+        <item>Album Mode</item>
+        <item>File Explorer Mode</item>
+    </string-array>
+    <string-array name="pref_list_browsing_mode_entryValues">
+        <item>PREF_LIST_BROWSING_MODE_ALBUM</item>
+        <item>PREF_LIST_BROWSING_MODE_FILE_EXPLORER</item>
+    </string-array>
+
 </resources>

@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+    <!-- primary -->
+    <color name="colorPrimary">#424242</color>                      <!-- grey 800 -->
+    <color name="colorPrimaryLight">#6D6D6D</color>
+    <color name="colorPrimaryDark">#1B1B1B</color>
+    <color name="colorAccent">#FFD200</color>
+    <color name="colorAccentDark">#F57F17</color>                   <!-- yellow 900 -->
+
+    <!-- colour -->
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- text -->
+    <color name="textBlackPrimary">#DE000000</color>                <!-- 87% opacity -->
+    <color name="textBlackSecondary">#8A000000</color>              <!-- 54% opacity -->
+    <color name="textBlackHint">#61000000</color>                   <!-- 38% opacity -->
+    <color name="textWhitePrimary">#FFFFFFFF</color>                <!-- 100% opacity -->
+    <color name="textWhiteSecondary">#B3FFFFFF</color>              <!-- 70% opacity -->
+    <color name="textWhiteHint">#80FFFFFF</color>                   <!-- 50% opacity -->
+
+    <!-- icon -->
+    <color name="iconBlackActive">@color/textBlackPrimary</color>
+    <color name="iconBlackActiveUnfocused">@color/textBlackSecondary</color>
+    <color name="iconBlackInactive">@color/textBlackHint</color>
+    <color name="iconWhiteActive">@color/textWhitePrimary</color>
+    <color name="iconWhiteActiveUnfocused">@color/textWhiteSecondary</color>
+    <color name="iconWhiteInactive">@color/textWhiteHint</color>
+
+    <!-- background -->
+    <color name="backgroundBlack">@color/colorPrimaryDark</color>
+    <color name="backgroundWhite">@color/white</color>
+    <color name="statusBarDefault">@color/black</color>
+    <color name="navigationBarDefault">@color/black</color>
+    <color name="statusBarTranslucent">#80000000</color>            <!-- 50% opacity -->
+    <color name="navigationBarTranslucent">#80000000</color>        <!-- 50% opacity -->
+    <color name="dialogBackgroundBlack">@color/colorPrimary
+    </color>     <!-- as per material design -->
+    <color name="dialogBackgroundWhite">@color/white
+    </color>            <!-- as per material design -->
+
+    <!-- divider -->
+    <color name="dividerBlack">#1F000000</color>                    <!-- 12% opacity -->
+    <color name="dividerWhite">#1FFFFFFF</color>                    <!-- 12% opacity -->
+
 </resources>

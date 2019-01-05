@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.gallery.layout.FolderLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folderLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription,RtlHardcoded,UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/folderLayout_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerInside"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/folderLayout_gradient_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/folderLayout_bottom_gradient_size"
+        android:background="@drawable/bg_rectangle_bottom_rounded_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/folderLayout_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/grid_1x"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/roboto_medium"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="@color/textWhitePrimary"
+        android:textSize="@dimen/text_subheading"
+        app:layout_constraintBottom_toTopOf="@+id/folderLayout_count"
+        app:layout_constraintLeft_toLeftOf="@+id/folderLayout_gradient_bottom"
+        app:layout_constraintRight_toRightOf="@+id/folderLayout_gradient_bottom"
+        app:layout_constraintTop_toTopOf="@id/folderLayout_gradient_bottom"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/folderLayout_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/grid_1x"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:layout_toStartOf="@+id/folderLayout_star"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:textColor="@color/textWhiteSecondary"
+        android:textSize="@dimen/text_body"
+        app:layout_constraintBottom_toBottomOf="@+id/folderLayout_gradient_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/folderLayout_gradient_bottom"
+        app:layout_constraintRight_toLeftOf="@+id/folderLayout_star"
+        app:layout_constraintTop_toBottomOf="@+id/folderLayout_name"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="2 folders, 35 files" />
+
+    <ImageView
+        android:id="@+id/folderLayout_star"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:layout_marginBottom="@dimen/grid_1x"
+        android:padding="@dimen/grid_quarter"
+        android:src="@drawable/ic_star_white_24dp"
+        android:tint="?colorAccent"
+        android:tintMode="src_in"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/folderLayout_gradient_bottom"
+        app:layout_constraintRight_toRightOf="@id/folderLayout_gradient_bottom"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/folderLayout_tick"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/grid_1x"
+        android:background="@drawable/bg_tick_circle_filled_white"
+        android:elevation="@dimen/grid_1x"
+        android:padding="@dimen/grid_quarter"
+        android:scaleType="fitCenter"
+        android:tint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_tick_white_24dp"
+        tools:visibility="visible" />
+
+</com.dokidevs.pholder.gallery.layout.FolderLayout>

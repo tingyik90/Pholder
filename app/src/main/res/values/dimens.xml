@@ -1,0 +1,90 @@
+<resources>
+
+    <!-- screen margin -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- fab -->
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- adView + 16dp -->
+    <dimen name="fab_margin_bottom">72dp</dimen>
+
+    <!-- bottomNavigationBar -->
+    <dimen name="bottomNavigationBar_height">56dp</dimen>
+
+    <!-- fileLayout -->
+    <dimen name="fileLayout_bottom_gradient_size">32dp</dimen>
+
+    <!-- folderLayout -->
+    <dimen name="folderLayout_bottom_gradient_size">56dp</dimen>
+
+    <!-- text -->
+    <dimen name="text_caption">12sp</dimen>
+    <dimen name="text_list_dense">13sp</dimen>
+    <dimen name="text_button">14sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_subheading">16sp</dimen>
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_headline">24sp</dimen>
+
+    <!-- grid -->
+    <dimen name="grid_quarter">2dp</dimen>
+    <dimen name="grid_half">4dp</dimen>
+    <dimen name="grid_1x">8dp</dimen>
+    <dimen name="grid_2x">16dp</dimen>
+    <dimen name="grid_3x">24dp</dimen>
+    <dimen name="grid_4x">32dp</dimen>
+    <dimen name="grid_5x">40dp</dimen>
+    <dimen name="grid_6x">48dp</dimen>
+    <dimen name="grid_7x">56dp</dimen>
+    <dimen name="grid_8x">64dp</dimen>
+
+    <!-- list -->
+    <dimen name="list_horizontal_margin">16dp</dimen>
+    <dimen name="list_text_left_margin">72dp</dimen>
+    <dimen name="list_icon_size">40dp</dimen>
+    <dimen name="list_two_line_height">72dp</dimen>
+    <dimen name="list_two_line_height_tight">64dp</dimen>
+    <dimen name="list_file_line_height">88dp</dimen>
+    <dimen name="list_folder_line_height">112dp</dimen>
+    <dimen name="list_large_visual_width">96dp</dimen>
+    <dimen name="list_large_visual_height">72dp</dimen>
+
+    <!-- gallery -->
+    <dimen name="categoryLayout_height">48dp</dimen>
+    <dimen name="dateLayout_height">48dp</dimen>
+    <dimen name="file_spacing">4dp</dimen>
+    <dimen name="folder_spacing">8dp</dimen>
+    <dimen name="file_min_size">120dp</dimen>
+    <dimen name="folder_min_size">160dp</dimen>
+
+    <!-- dialog -->
+    <dimen name="dialog_width">280dp</dimen>
+    <dimen name="dialog_horizontal_margin">24dp</dimen>
+    <dimen name="dialog_title_top_margin">24dp</dimen>
+    <dimen name="dialog_title_bottom_margin">20dp</dimen>
+    <dimen name="dialog_editText_vertical_padding">16dp</dimen>
+    <dimen name="dialog_button_padding">8dp</dimen>
+    <dimen name="dialog_button_height">36dp</dimen>
+    <dimen name="dialog_header_height">64dp</dimen>
+    <dimen name="dialog_button_layout_height">52dp</dimen>
+    <dimen name="dialog_button_min_width">64dp</dimen>
+
+    <!-- slideshow -->
+    <!-- 48dp slideshowActivity_action_layout height + 8dp margin -->
+    <dimen name="seekControl_bottom_margin">56dp</dimen>
+    <!-- 48dp slideshowActivity_action_layout height + 24dp above -->
+    <dimen name="slideshowImageFragment_gradient_bottom_height">72dp</dimen>
+    <!-- 56dp seekControl_bottom_margin + 24dp slideshowVideoFragment_seekBarLayout height + 24dp above -->
+    <dimen name="slideshowVideoFragment_gradient_bottom_height">104dp</dimen>
+    <!-- space between each slide in viewPager -->
+    <dimen name="slideshow_margin_page">32dp</dimen>
+
+    <!-- divider -->
+    <dimen name="divider_height">1dp</dimen>
+
+    <!-- icon -->
+    <dimen name="icon_click_area">48dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+
+</resources>

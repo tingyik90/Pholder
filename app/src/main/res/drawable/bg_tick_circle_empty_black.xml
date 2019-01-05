@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@android:color/transparent" />
+
+    <size
+        android:width="@dimen/icon_click_area"
+        android:height="@dimen/icon_click_area" />
+
+    <stroke
+        android:width="@dimen/grid_quarter"
+        android:color="@color/textBlackHint" />
+
+</shape>

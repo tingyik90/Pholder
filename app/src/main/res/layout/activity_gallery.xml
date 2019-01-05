@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.base.InsetsConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/galleryActivity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    tools:context="com.dokidevs.pholder.gallery.GalleryActivity"
+    tools:ignore="ContentDescription,RtlHardcoded">
+
+    <FrameLayout
+        android:id="@+id/galleryActivity_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/galleryActivity_appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/galleryActivity_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="@dimen/grid_half" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/galleryActivity_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/grid_half"
+                app:tabGravity="fill"
+                app:tabIconTint="@color/white"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabMode="fixed" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </FrameLayout>
+
+    <com.dokidevs.pholder.base.LockableViewPager
+        android:id="@+id/galleryActivity_lockableViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?backgroundColor"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/galleryActivity_appBarLayout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryActivity_fab_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/fab_margin"
+        android:tint="@color/black"
+        android:transitionName="galleryActivity_fab_video"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/galleryActivity_fab_camera"
+        app:layout_constraintLeft_toLeftOf="@+id/galleryActivity_fab_camera"
+        app:layout_constraintRight_toRightOf="@+id/galleryActivity_fab_camera"
+        app:srcCompat="@drawable/ic_video_white_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/galleryActivity_fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:tint="@color/black"
+        android:transitionName="galleryActivity_fab_camera"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_camera_white_24dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/galleryActivity_splashScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/galleryActivity_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/galleryActivity_firstUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/grid_8x"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:elevation="16dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/galleryActivity_firstUpdate_wait"
+            android:textColor="@color/textBlackPrimary"
+            android:textSize="@dimen/text_body"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/galleryActivity_logo"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.dokidevs.pholder.base.InsetsConstraintLayout>
+

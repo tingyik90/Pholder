@@ -4,29 +4,126 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'io.fabric'
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.dokidevs.pholder"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        // Always increase version code and name immediately after release to avoid play console from reporting crash on debug build
+        // See https://stackoverflow.com/a/48976625/3584439
+        versionCode 12
+        versionName "2.3.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    if (project.hasProperty("Pholder.properties") && new File(project.property("Pholder.properties")).exists()) {
+        Properties props = new Properties()
+        props.load(new FileInputStream(file(project.property("Pholder.properties"))))
+        signingConfigs {
+            debug {
+                keyAlias props['debug.keyAlias']
+                keyPassword props['debug.keyPassword']
+                storeFile file(props['debug.storeFile'])
+                storePassword props['debug.storePassword']
+            }
+            leak {
+                keyAlias props['leak.keyAlias']
+                keyPassword props['leak.keyPassword']
+                storeFile file(props['leak.storeFile'])
+                storePassword props['leak.storePassword']
+            }
+            release {
+                keyAlias props['release.keyAlias']
+                keyPassword props['release.keyPassword']
+                storeFile file(props['release.storeFile'])
+                storePassword props['release.storePassword']
+            }
+        }
+        buildTypes {
+            debug {
+                applicationIdSuffix ".debug"
+                debuggable true
+                minifyEnabled true
+                useProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.debug
+                // Disable firebase analytics and crashlytics for debug build
+                resValue("bool", "firebase_analytics_collection_deactivated", "true")
+                resValue("bool", "firebase_crashlytics_collection_enabled", "false")
+                resValue("string", "google_maps_key", props['Pholder.google_maps_key'])
+            }
+            // Leak build for activating leak canary
+            leak {
+                applicationIdSuffix ".leak"
+                debuggable true
+                minifyEnabled true
+                useProguard false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.leak
+                resValue("bool", "firebase_analytics_collection_deactivated", "true")
+                resValue("bool", "firebase_crashlytics_collection_enabled", "false")
+                resValue("string", "google_maps_key", props['Pholder.google_maps_key'])
+            }
+            release {
+                debuggable false
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+                resValue("bool", "firebase_analytics_collection_deactivated", "false")
+                resValue("bool", "firebase_crashlytics_collection_enabled", "true")
+                resValue("string", "google_maps_key", props['Pholder.google_maps_key'])
+            }
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-commons:0.10.7"
+    // For androidx
+    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.transition:transition:1.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    // For room
+    implementation 'androidx.room:room-runtime:2.0.0'
+    kapt 'androidx.room:room-compiler:2.0.0'
+    // For play services
+    implementation "com.google.android.gms:play-services-maps:16.0.0"
+    implementation "com.google.android.gms:play-services-location:16.0.0"
+    // Others
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+    implementation 'com.github.MFlisar:DragSelectRecyclerView:0.3'
+    implementation 'com.github.tingyik90:snackprogressbar:5.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.sprylab.android.texturevideoview:texturevideoview:1.2.1'
+    implementation 'com.takisoft.preferencex:preferencex:1.0.0'
+    // For firebase analytics
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    // For firebase crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
+    // For logging
+    implementation 'com.github.tingyik90:dokilog:1.0.0'
+    // For leak detection
+    leakImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    leakImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    // For testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply plugin: 'com.google.gms.google-services'

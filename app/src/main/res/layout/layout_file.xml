@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.gallery.layout.FileLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fileLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?textColorHint"
+    tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry">
+
+    <ImageView
+        android:id="@+id/fileLayout_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/fileLayout_gradient_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fileLayout_bottom_gradient_size"
+        android:background="@drawable/bg_gradient_bottom_dark"
+        android:transitionName="fileLayout_gradient_bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/fileLayout_play"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/grid_half"
+        android:background="@drawable/bg_control_play_pause"
+        android:padding="@dimen/grid_half"
+        android:scaleType="fitCenter"
+        android:transitionName="slideshowVideoFragment_playPause"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileLayout_gradient_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/fileLayout_gradient_bottom"
+        app:layout_constraintTop_toTopOf="@+id/fileLayout_gradient_bottom"
+        app:srcCompat="@drawable/ic_play_white_48dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/fileLayout_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingLeft="@dimen/grid_half"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_caption"
+        android:transitionName="fileLayout_time"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileLayout_gradient_bottom"
+        app:layout_constraintLeft_toRightOf="@+id/fileLayout_play"
+        app:layout_constraintTop_toTopOf="@+id/fileLayout_gradient_bottom"
+        tools:text="1:23"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/fileLayout_tick"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/grid_half"
+        android:background="@drawable/bg_tick_circle_filled_white"
+        android:elevation="@dimen/grid_1x"
+        android:padding="@dimen/grid_quarter"
+        android:scaleType="fitCenter"
+        android:tint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_tick_white_24dp"
+        tools:visibility="visible" />
+
+</com.dokidevs.pholder.gallery.layout.FileLayout>

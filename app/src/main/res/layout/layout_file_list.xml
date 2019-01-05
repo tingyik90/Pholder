@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dokidevs.pholder.gallery.layout.FileListLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fileListLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_file_line_height"
+    tools:ignore="contentDescription,RtlHardcoded,RtlSymmetry">
+
+    <View
+        android:id="@+id/fileListLayout_thumbnailBackground"
+        android:layout_width="@dimen/list_large_visual_width"
+        android:layout_height="@dimen/list_large_visual_height"
+        android:background="?textColorHint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fileListLayout_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintLeft_toLeftOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintTop_toTopOf="@+id/fileListLayout_thumbnailBackground"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <View
+        android:id="@+id/fileListLayout_gradient_bottom"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/fileLayout_bottom_gradient_size"
+        android:background="@drawable/bg_gradient_bottom_dark"
+        android:transitionName="fileListLayout_gradient_bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintLeft_toLeftOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="@+id/fileListLayout_thumbnailBackground"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/fileListLayout_play"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/grid_half"
+        android:background="@drawable/bg_control_play_pause"
+        android:padding="@dimen/grid_half"
+        android:scaleType="fitCenter"
+        android:transitionName="slideshowVideoFragment_playPause"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileListLayout_gradient_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/fileListLayout_gradient_bottom"
+        app:layout_constraintTop_toTopOf="@+id/fileListLayout_gradient_bottom"
+        app:srcCompat="@drawable/ic_play_white_48dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/fileListLayout_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/roboto_medium"
+        android:paddingLeft="@dimen/grid_half"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_caption"
+        android:transitionName="fileListLayout_time"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fileListLayout_gradient_bottom"
+        app:layout_constraintLeft_toRightOf="@+id/fileListLayout_play"
+        app:layout_constraintTop_toTopOf="@+id/fileListLayout_gradient_bottom"
+        tools:text="1:23"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/fileListLayout_tick"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_margin="@dimen/grid_half"
+        android:background="@drawable/bg_tick_circle_filled_white"
+        android:elevation="@dimen/grid_1x"
+        android:padding="@dimen/grid_quarter"
+        android:scaleType="fitCenter"
+        android:tint="@color/colorPrimaryDark"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintTop_toTopOf="@+id/fileListLayout_thumbnailBackground"
+        app:srcCompat="@drawable/ic_tick_white_24dp"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/fileListLayout_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/grid_2x"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_medium"
+        android:singleLine="true"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/text_body"
+        app:layout_constraintBottom_toTopOf="@+id/fileListLayout_date"
+        app:layout_constraintLeft_toRightOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/fileListLayout_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/grid_2x"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/roboto"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/text_body"
+        app:layout_constraintBottom_toTopOf="@+id/fileListLayout_info"
+        app:layout_constraintLeft_toRightOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fileListLayout_name"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/fileListLayout_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/grid_2x"
+        android:layout_marginRight="@dimen/grid_1x"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/text_body"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fileListLayout_date"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="2.3 MB" />
+
+    <View
+        android:id="@+id/fileListLayout_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/grid_2x"
+        android:background="?android:listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/fileListLayout_thumbnailBackground"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</com.dokidevs.pholder.gallery.layout.FileListLayout>

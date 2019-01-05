@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<item
+        android:id="@+id/galleryActivity_menu_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/menu_search"
+        app:showAsAction="always" />-->
+
+    <item
+        android:id="@+id/galleryActivity_menu_createFolder"
+        android:icon="@drawable/ic_create_folder_white_24dp"
+        android:title="@string/menu_createFolder"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_sortBy"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/menu_sortBy"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_gridView"
+        android:icon="@drawable/ic_view_grid_white_24dp"
+        android:title="@string/menu_gridView"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_listView"
+        android:icon="@drawable/ic_view_list_white_24dp"
+        android:title="@string/menu_listView"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_starFolder"
+        android:icon="@drawable/ic_star_white_24dp"
+        android:title="@string/menu_starFolder"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_removeStarFolder"
+        android:icon="@drawable/ic_star_border_white_24dp"
+        android:title="@string/menu_removeStarFolder"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:title="@string/menu_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_delete"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:title="@string/menu_delete"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_selectAll"
+        android:icon="@drawable/ic_tick_all_white_24dp"
+        android:title="@string/menu_selectAll"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_moveTo"
+        android:title="@string/menu_moveTo"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_rename"
+        android:title="@string/menu_rename"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_folderInfo"
+        android:title="@string/menu_folderInfo"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/galleryActivity_menu_settings"
+        android:title="@string/menu_settings"
+        app:showAsAction="never" />
+
+</menu>
