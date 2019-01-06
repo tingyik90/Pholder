@@ -69,6 +69,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <!-- For API 28 above, as required on https://developers.google.com/maps/documentation/android-sdk/config -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <!-- firebase reporting -->
         <meta-data
