@@ -88,7 +88,7 @@ class SlideshowActivity :
     private val shareButton by lazy { slideshowActivity_action_share }
     private val infoButton by lazy { slideshowActivity_action_info }
     private val deleteButton by lazy { slideshowActivity_action_delete }
-    private lateinit var slideshowAdapter: SlideshowAdapter
+    private val slideshowAdapter by lazy { SlideshowAdapter(supportFragmentManager) }
 
     /* transitions */
     private val sharedElementCallback = BaseSharedElementCallback()
@@ -180,7 +180,7 @@ class SlideshowActivity :
 
     // setAdapter
     private fun setAdapter(fileTags: List<FileTag>) {
-        slideshowAdapter = SlideshowAdapter(supportFragmentManager, fileTags.toMutableList())
+        slideshowAdapter.setFileTags(fileTags)
     }
 
     // setViewPager

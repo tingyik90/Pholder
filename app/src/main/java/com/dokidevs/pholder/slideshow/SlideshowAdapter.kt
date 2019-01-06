@@ -8,10 +8,10 @@ import com.dokidevs.pholder.data.FileTag
 import com.dokidevs.pholder.data.PholderTagUtil
 
 /*--- SlideshowAdapter ---*/
-class SlideshowAdapter(
-    fragmentManager: FragmentManager,
-    private val fileTags: MutableList<FileTag>
-) : BaseFragmentStatePagerAdapter(fragmentManager) {
+class SlideshowAdapter(fragmentManager: FragmentManager) : BaseFragmentStatePagerAdapter(fragmentManager) {
+
+    /* parameters */
+    private val fileTags = mutableListOf<FileTag>()
 
     // getCount
     override fun getCount(): Int {
@@ -43,6 +43,12 @@ class SlideshowAdapter(
         } else {
             position
         }
+    }
+
+    // setFileTags
+    fun setFileTags(fileTags: List<FileTag>) {
+        this.fileTags.clear()
+        this.fileTags.addAll(fileTags)
     }
 
     // getAllFileTags
