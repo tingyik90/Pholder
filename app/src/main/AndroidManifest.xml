@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".PholderApplication"
@@ -47,8 +48,12 @@
             android:label="@string/infoActivity_title" />
 
         <!-- service -->
-        <service android:name=".service.FileIntentService" />
-        <service android:name=".service.MediaIntentService" />
+        <service
+            android:name=".service.FileIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".service.MediaIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <!-- provider -->
         <!-- Due to using different flavour, replace with ${applicationId} so that there are different authorities,

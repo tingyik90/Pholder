@@ -1,15 +1,15 @@
 package com.dokidevs.pholder.service
 
-import android.app.IntentService
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.media.MediaScannerConnection
 import android.provider.MediaStore
+import androidx.core.app.JobIntentService
 import com.dokidevs.dokilog.DokiLog
 import com.dokidevs.dokilog.d
 import com.dokidevs.pholder.data.PholderTagUtil
-
+import com.dokidevs.pholder.utils.MEDIA_INTENT_SERVICE_JOB_ID
 import java.io.File
 
 /*--- MediaIntentService ---*/
@@ -17,7 +17,7 @@ import java.io.File
 // Note that contentResolver only notify MTP via sendObjectAdded() and sendObjectRemoved() in contentResolver.insert() and contentResolver.delete().
 // Hence, when moving files, updating file path via contentResolver.update() will cause the file still showing in the old location.
 // Deleting the files show in MTP at old location will also delete the files at new location, since MTP and MediaStore db are tied via uri.
-class MediaIntentService : IntentService("MediaIntentService"), DokiLog {
+class MediaIntentService : JobIntentService(), DokiLog {
 
     /* companion object */
     companion object {
@@ -48,27 +48,30 @@ class MediaIntentService : IntentService("MediaIntentService"), DokiLog {
 
         // scanMediaPaths
         fun scanMediaPaths(context: Context, scanPairs: List<Pair<String, Int>>) {
-            val intent = Intent(context, MediaIntentService::class.java)
-            intent.action = ACTION_MEDIA_SCAN_PATHS
+            val intent = Intent(ACTION_MEDIA_SCAN_PATHS)
             val mapKey = PholderTagUtil.insertMapUnique(scanPairMap, scanPairs)
             intent.putExtra(MAP_KEY, mapKey)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // updateLatLng
         fun updateLatLng(context: Context, filePath: String, lat: Double, lng: Double) {
-            val intent = Intent(context, MediaIntentService::class.java)
-            intent.action = ACTION_MEDIA_UPDATE_LAT_LNG
+            val intent = Intent(ACTION_MEDIA_UPDATE_LAT_LNG)
             intent.putExtra(FILE_PATH, filePath)
             intent.putExtra(LATITUDE, lat)
             intent.putExtra(LONGITUDE, lng)
-            context.startService(intent)
+            enqueueWork(context, intent)
+        }
+
+        // enqueueWork
+        private fun enqueueWork(context: Context, intent: Intent) {
+            enqueueWork(context, MediaIntentService::class.java, MEDIA_INTENT_SERVICE_JOB_ID, intent)
         }
 
     }
 
-    // onHandleIntent
-    override fun onHandleIntent(intent: Intent) {
+    // onHandleWork
+    override fun onHandleWork(intent: Intent) {
         val action = intent.action
         val mapKey = intent.getStringExtra(MAP_KEY)
         d("action = $action")

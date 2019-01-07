@@ -1,9 +1,9 @@
 package com.dokidevs.pholder.service
 
-import android.app.IntentService
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.core.app.JobIntentService
 import androidx.core.content.FileProvider
 import com.dokidevs.dokilog.DokiLog
 import com.dokidevs.dokilog.d
@@ -14,15 +14,12 @@ import com.dokidevs.pholder.data.FileTag
 import com.dokidevs.pholder.data.PholderDatabase
 import com.dokidevs.pholder.data.PholderTag
 import com.dokidevs.pholder.data.PholderTagUtil
-import com.dokidevs.pholder.utils.FILE_PROVIDER
-import com.dokidevs.pholder.utils.MIME_IMAGE_MIX
-import com.dokidevs.pholder.utils.MIME_VIDEO_MIX
+import com.dokidevs.pholder.utils.*
 import com.dokidevs.pholder.utils.PrefManager.Companion.PREF_AUTOMATICALLY_STAR_CREATED_FOLDER
-import com.dokidevs.pholder.utils.localBroadcast
 import java.io.File
 
 /*--- FileIntentService ---*/
-class FileIntentService : IntentService("FileIntentService"), DokiLog {
+class FileIntentService : JobIntentService(), DokiLog {
 
     /* companion object */
     companion object {
@@ -62,59 +59,50 @@ class FileIntentService : IntentService("FileIntentService"), DokiLog {
 
         // initialise
         fun initialise(context: Context) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_INITIALISE
-            context.startService(intent)
+            enqueueWork(context, Intent(ACTION_INITIALISE))
         }
 
         // updateFiles
         fun updateFiles(context: Context) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FILES_UPDATE
-            context.startService(intent)
+            enqueueWork(context, Intent(ACTION_FILES_UPDATE))
         }
 
         // delete files
         fun deleteFiles(context: Context, pholderTags: List<PholderTag>) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FILES_DELETE
+            val intent = Intent(ACTION_FILES_DELETE)
             putPholderTags(intent, pholderTags)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // moveFiles
         fun moveFiles(context: Context, destinationRootPath: String, pholderTags: List<PholderTag>) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FILES_MOVE
+            val intent = Intent(ACTION_FILES_MOVE)
             intent.putExtra(FILES_DESTINATION_ROOT_PATH, destinationRootPath)
             putPholderTags(intent, pholderTags)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // renameFiles
         fun renameFiles(context: Context, fileName: String, pholderTags: List<PholderTag>) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FILES_RENAME
+            val intent = Intent(ACTION_FILES_RENAME)
             intent.putExtra(FILES_RENAME_FILE_NAME, fileName)
             putPholderTags(intent, pholderTags)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // createFolder
         fun createFolder(context: Context, folderPath: String) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FOLDER_CREATE
+            val intent = Intent(ACTION_FOLDER_CREATE)
             intent.putExtra(FOLDER_CREATE_PATH, folderPath)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // starFolders
         fun starFolders(context: Context, toStar: Boolean, pholderTags: List<PholderTag>) {
-            val intent = Intent(context, FileIntentService::class.java)
-            intent.action = ACTION_FOLDER_STAR
+            val intent = Intent(ACTION_FOLDER_STAR)
             intent.putExtra(FOLDER_STAR_BOOLEAN, toStar)
             putPholderTags(intent, pholderTags)
-            context.startService(intent)
+            enqueueWork(context, intent)
         }
 
         // shareFiles
@@ -142,6 +130,11 @@ class FileIntentService : IntentService("FileIntentService"), DokiLog {
             }
         }
 
+        // enqueueWork
+        private fun enqueueWork(context: Context, intent: Intent) {
+            enqueueWork(context, FileIntentService::class.java, FILE_INTENT_SERVICE_JOB_ID, intent)
+        }
+
         // putPholderTags
         private fun putPholderTags(intent: Intent, pholderTags: List<PholderTag>) {
             val mapKey = PholderTagUtil.insertMapUnique(pholderTagMap, pholderTags)
@@ -157,8 +150,8 @@ class FileIntentService : IntentService("FileIntentService"), DokiLog {
 
     }
 
-    // onHandleIntent
-    override fun onHandleIntent(intent: Intent) {
+    // onHandleWork
+    override fun onHandleWork(intent: Intent) {
         var resultIntent: Intent? = null
         try {
             val action = intent.action
