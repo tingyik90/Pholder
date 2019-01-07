@@ -2,6 +2,7 @@ package com.dokidevs.pholder.data
 
 import androidx.annotation.Keep
 import androidx.room.*
+import com.google.android.gms.maps.model.LatLng
 import java.io.File
 import java.util.*
 
@@ -123,6 +124,11 @@ open class FileTag(
         } else {
             getFilePath()
         }
+    }
+
+    // getLatLng
+    fun getLatLng(): LatLng {
+        return LatLng(lat, lng)
     }
 
     // isImage
