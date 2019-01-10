@@ -170,7 +170,7 @@ class SlideshowActivity :
     }
 
     // setViewsToMove
-    private fun setViewsToMove(fragment: SlideshowBaseFragment?) {
+    private fun setViewsToMove(fragment: SlideshowBaseFragment) {
         if (fragment is SlideshowVideoFragment) {
             snackProgressBarManager.setViewsToMove(arrayOf(actionLayout, fragment.getSeekBarLayout()))
         } else {
@@ -232,8 +232,11 @@ class SlideshowActivity :
                 if (previousItem != currentItem) {
                     slideshowAdapter.getSlideshowBaseFragment(previousItem)?.onUnselected()
                     val currentFragment = getCurrentSlideshowBaseFragment()
-                    currentFragment?.onSelected()
-                    setViewsToMove(currentFragment)
+                    if (currentFragment != null) {
+                        currentFragment.onSelected()
+                        setViewsToMove(currentFragment)
+                        resultIntent.putExtra(GalleryBaseFragment.SCROLL_TO_UID, currentFragment.getFilePath())
+                    }
                 }
             }
         })
@@ -432,8 +435,6 @@ class SlideshowActivity :
         showSystemUI(true)
         // finishAfterTransition() is called after onBackPressed, setResult in onPause is not working
         // because the result is finalised in finish(), so call setResult here
-        val filePath = getCurrentSlideshowBaseFragment()?.getFilePath() ?: ""
-        resultIntent.putExtra(GalleryBaseFragment.SCROLL_TO_UID, filePath)
         setResult(Activity.RESULT_OK, resultIntent)
         slideshowAdapter.forEachSlideshowBaseFragment { _, slideshowBaseFragment ->
             slideshowBaseFragment.prepareExitTransition()
@@ -522,7 +523,9 @@ class SlideshowActivity :
 
     // onVideoError
     override fun onVideoError(fragment: SlideshowVideoFragment) {
-        snackProgressBarManager.shortSnackBar(this, R.string.toast_videoFragment_play_failed)
+        if (fragment == getCurrentSlideshowBaseFragment()) {
+            snackProgressBarManager.shortSnackBar(this, R.string.toast_videoFragment_play_failed)
+        }
     }
 
     // onVideoHideControlLayout
@@ -651,7 +654,6 @@ class SlideshowActivity :
     // onFinishAction
     override fun onFinishAction() {
         // onFinish is called after transition, in case finish is called directly, set result here
-        resultIntent.putExtra(GalleryBaseFragment.SCROLL_TO_UID, "")
         setResult(Activity.RESULT_OK, resultIntent)
         // Clear map, don't do in onDestroy as it can happen during rotation
         fileTagMap.remove(getMapKey())

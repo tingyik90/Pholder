@@ -425,7 +425,7 @@ class SlideshowVideoFragment : SlideshowBaseFragment(), View.OnClickListener {
                 fragmentListener?.onVideoPlay(this)
             } catch (ex: Exception) {
                 e(ex)
-                fragmentListener?.onVideoError(this)
+                onError()
             }
         }
     }
