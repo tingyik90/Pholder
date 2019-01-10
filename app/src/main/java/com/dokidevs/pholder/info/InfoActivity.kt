@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.location.Geocoder
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.MenuItem
 import androidx.core.view.isVisible
 import androidx.exifinterface.media.ExifInterface
@@ -168,74 +167,89 @@ class InfoActivity : BaseActivity(), OnMapReadyCallback {
 
     // setLocation
     private fun setLocation() {
+        // Geocoder takes time to complete, so do it in background.
         doAsync {
-            if (latLng == null) {
-                // Get latLng from MediaStore for others, or when exif fails
-                val cursor = contentResolver.query(
-                    PholderTagUtil.getExternalContentUri(fileTag.getFilePath()),
-                    // Column name is same for image and video
-                    arrayOf(MediaStore.Images.ImageColumns.LATITUDE, MediaStore.Images.ImageColumns.LONGITUDE),
-                    MediaStore.MediaColumns.DATA + " = ?",
-                    arrayOf(fileTag.getFilePath()),
-                    null
-                )
-                if (cursor != null) {
-                    while (cursor.moveToNext()) {
-                        val lat = cursor.getDouble(0)
-                        val lng = cursor.getDouble(1)
-                        if (lat != 0.0 && lng != 0.0) {
-                            d("mediaStore latLng is available")
-                            latLng = LatLng(lat, lng)
-                        }
-                    }
-                    cursor.close()
-                }
-            }
+            var latLng = fileTag.getLatLng()
             // Get latLng from exif for jpg if MediaStore failed
-            if (latLng == null && fileTag.isJpg()) {
-                val exifInterface = ExifInterface(fileTag.getFilePath())
-                val latLong = exifInterface.latLong
-                if (latLong != null) {
-                    d("exif latLng is available")
-                    latLng = LatLng(latLong[0], latLong[1])
+            if (latLng.latitude == 0.0 && latLng.longitude == 0.0 && fileTag.isJpg()) {
+                try {
+                    val exifInterface = ExifInterface(fileTag.getFilePath())
+                    val latLong = exifInterface.latLong
+                    if (latLong != null) {
+                        d("exif latLng is available")
+                        latLng = LatLng(latLong[0], latLong[1])
+                    }
+                } catch (ex: Exception) {
+                    e(ex)
                 }
             }
-            if (latLng != null) {
+            if (latLng.latitude != 0.0 && latLng.longitude != 0.0) {
                 val infoSet = InfoListAdapter.InfoSet(R.drawable.ic_place_white_24dp)
-                val _latLng = latLng!!
                 infoSet.textPrimary =
-                        "${String.format("%.3f", _latLng.latitude)}, ${String.format("%.3f", _latLng.longitude)}"
+                        "${String.format("%.3f", latLng.latitude)}, ${String.format("%.3f", latLng.longitude)}"
                 try {
                     val addresses = Geocoder(this@InfoActivity, Locale.getDefault()).getFromLocation(
-                        _latLng.latitude,
-                        _latLng.longitude,
-                        1
+                        latLng.latitude,
+                        latLng.longitude,
+                        5
                     )
-                    val cityName = addresses[0].locality
-                    val stateName = addresses[0].adminArea
+                    var cityName = ""
+                    var stateName = ""
+                    var countryName = ""
+                    for (address in addresses) {
+                        // See https://stackoverflow.com/a/26960384/3584439
+                        // stateName is usually available but cityName may not.
+                        // As long as we hit a cityName, we return the result. Else, this will use whatever stateName
+                        // which is available last.
+                        if (!address.countryName.isNullOrEmpty()) {
+                            countryName = address.countryName
+                        }
+                        if (!address.adminArea.isNullOrEmpty()) {
+                            stateName = address.adminArea
+                        }
+                        if (!address.locality.isNullOrEmpty()) {
+                            cityName = address.locality
+                            break
+                        }
+                        /* For debugging
+                        d("address = ${address.getAddressLine(0)}")
+                        d("featureName = ${address.featureName}")
+                        d("premises = ${address.premises}")
+                        d("thoroughfare = ${address.thoroughfare}")
+                        d("subThoroughfare = ${address.subThoroughfare}")
+                        d("locality = ${address.locality}")
+                        d("subLocality = ${address.subLocality}")
+                        d("adminArea = ${address.adminArea}")
+                        d("subAdminArea = ${address.subAdminArea}")
+                        */
+                    }
                     // If geoCoder successful, then make coordinate secondary
                     infoSet.textSecondary =
-                            "${String.format("%.3f", _latLng.latitude)}, ${String.format("%.3f", _latLng.longitude)}"
+                            "${String.format("%.3f", latLng.latitude)}, ${String.format("%.3f", latLng.longitude)}"
                     when {
-                        !cityName.isNullOrEmpty() && !stateName.isNullOrEmpty() -> {
+                        !cityName.isEmpty() && !stateName.isEmpty() -> {
                             infoSet.textPrimary = "$cityName, $stateName"
                         }
-                        !cityName.isNullOrEmpty() -> {
+                        !cityName.isEmpty() -> {
                             infoSet.textPrimary = cityName
                         }
-                        !stateName.isNullOrEmpty() -> {
+                        !stateName.isEmpty() -> {
                             infoSet.textPrimary = stateName
                         }
+                        !countryName.isEmpty() -> {
+                            infoSet.textPrimary = countryName
+                        }
                         else -> {
-                            // City and state not found, show coordinate only as primary, cancel secondary
+                            // No data found, show coordinate only as primary, cancel secondary
                             infoSet.textSecondary = ""
                         }
                     }
                 } catch (ex: Exception) {
                     e(ex)
                 } finally {
-                    // If geoCoder failed, proceed to show coordinate
+                    // Proceed to show coordinate
                     uiThread {
+                        this@InfoActivity.latLng = latLng
                         adapter.addInfo(infoSet, true)
                         setMap()
                     }
