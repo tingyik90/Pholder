@@ -423,7 +423,8 @@ class GalleryActivity : GalleryBaseActivity(), BaseDialogFragment.DialogListener
                 when (rootFile) {
                     PUBLIC_ROOT,
                     ALBUM_ROOT,
-                    STAR_ROOT -> {
+                    STAR_ROOT,
+                    ALL_VIDEOS_FOLDER -> {
                         if (isImageCamera) {
                             longToast(R.string.toast_startCamera_warn_root_not_allowed_image)
                         } else {
