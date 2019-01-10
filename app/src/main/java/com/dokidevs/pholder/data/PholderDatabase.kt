@@ -212,8 +212,10 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
             // Calling Images.Media / Video.Media will get all available constants.
             val imageProjection = arrayOf(
                 MediaStore.MediaColumns.DATA,
+                MediaStore.Images.ImageColumns._ID,
                 MediaStore.Images.ImageColumns.DATE_TAKEN,
-                MediaStore.Images.ImageColumns._ID
+                MediaStore.Images.ImageColumns.LATITUDE,
+                MediaStore.Images.ImageColumns.LONGITUDE
                 // MediaScannerConnection.scanFile only adds DATE_TAKEN. DATE_ADDED and DATE_MODIFIED are not included.
                 // Below are for debugging purpose
                 /*MediaStore.Images.ImageColumns.DATE_MODIFIED,
@@ -225,8 +227,6 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                 MediaStore.Images.ImageColumns.WIDTH,
                 MediaStore.Images.ImageColumns.DISPLAY_NAME,
                 MediaStore.Images.ImageColumns.IS_PRIVATE,
-                MediaStore.Images.ImageColumns.LATITUDE,
-                MediaStore.Images.ImageColumns.LONGITUDE,
                 MediaStore.Images.ImageColumns.MINI_THUMB_MAGIC,
                 MediaStore.Images.ImageColumns.ORIENTATION,
                 MediaStore.Images.ImageColumns.PICASA_ID,
@@ -253,9 +253,11 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                 newFileTags.ensureCapacity(imageCursor.count + 10)
                 while (imageCursor.moveToNext()) {
                     val filePath = imageCursor.getString(0)
-                    val dateTaken = imageCursor.getLong(1)
-                    val mediaStoreId = imageCursor.getLong(2)
-                    newFileTags.add(FileTag(filePath, mediaStoreId, dateTaken))
+                    val mediaStoreId = imageCursor.getLong(1)
+                    val dateTaken = imageCursor.getLong(2)
+                    val lat = imageCursor.getDouble(3)
+                    val lng = imageCursor.getDouble(4)
+                    newFileTags.add(FileTag(filePath, mediaStoreId, dateTaken, 0, lat, lng))
                     // Below are for debugging purpose
                     /*val dateModified = imageCursor.getLong(imageCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_MODIFIED))
                     val dateAdded = imageCursor.getLong(imageCursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_ADDED))
@@ -300,9 +302,11 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
             // Get videos
             val videoProjection = arrayOf(
                 MediaStore.MediaColumns.DATA,
+                MediaStore.Video.VideoColumns._ID,
                 MediaStore.Video.VideoColumns.DATE_TAKEN,
                 MediaStore.Video.VideoColumns.DURATION,
-                MediaStore.Video.VideoColumns._ID
+                MediaStore.Video.VideoColumns.LATITUDE,
+                MediaStore.Video.VideoColumns.LONGITUDE
             )
             // Note that 3gp is registered as mp4 by MediaScanner
             val videoSelection =
@@ -328,10 +332,12 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                 newFileTags.ensureCapacity(newFileTags.size + videoCursor.count + 10)
                 while (videoCursor.moveToNext()) {
                     val filePath = videoCursor.getString(0)
-                    val dateTaken = videoCursor.getLong(1)
-                    val duration = videoCursor.getInt(2)
-                    val mediaStoreId = videoCursor.getLong(3)
-                    newFileTags.add(FileTag(filePath, mediaStoreId, dateTaken, duration))
+                    val mediaStoreId = videoCursor.getLong(1)
+                    val dateTaken = videoCursor.getLong(2)
+                    val duration = videoCursor.getInt(3)
+                    val lat = videoCursor.getDouble(4)
+                    val lng = videoCursor.getDouble(5)
+                    newFileTags.add(FileTag(filePath, mediaStoreId, dateTaken, duration, lat, lng))
                 }
                 videoCursor.close()
             }
