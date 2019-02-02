@@ -47,8 +47,10 @@ android {
             debug {
                 applicationIdSuffix ".debug"
                 debuggable true
-                minifyEnabled true
-                useProguard false
+                minifyEnabled false
+                // Starting Android Studio 3.3, when setting useProguard false, the plugin now uses R8 instead of
+                // ProGuard to shrink and obfuscate. This means you can't minify without obfuscate anymore.
+                // See https://developer.android.com/studio/releases/gradle-plugin#3-3-0
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 signingConfig signingConfigs.debug
                 // Disable firebase analytics and crashlytics for debug build
@@ -60,8 +62,7 @@ android {
             leak {
                 applicationIdSuffix ".leak"
                 debuggable true
-                minifyEnabled true
-                useProguard false
+                minifyEnabled false
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 signingConfig signingConfigs.leak
                 resValue("bool", "firebase_analytics_collection_deactivated", "true")
