@@ -54,6 +54,9 @@
         <service
             android:name=".service.MediaIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".service.GeocoderIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <!-- provider -->
         <!-- Due to using different flavour, replace with ${applicationId} so that there are different authorities,
