@@ -8,7 +8,9 @@ import android.provider.MediaStore
 import androidx.core.app.JobIntentService
 import com.dokidevs.dokilog.DokiLog
 import com.dokidevs.dokilog.d
+import com.dokidevs.pholder.data.FileAction.Companion.ACTION_ADD
 import com.dokidevs.pholder.data.PholderTagUtil
+import com.dokidevs.pholder.data.fileActionDao
 import com.dokidevs.pholder.utils.MEDIA_INTENT_SERVICE_JOB_ID
 import java.io.File
 
@@ -178,7 +180,8 @@ class MediaIntentService : JobIntentService(), DokiLog {
 
     // updateLatLng
     private fun updateLatLng(filePath: String, lat: Double, lng: Double) {
-        if (lat != 0.0 && lng != 0.0) {
+        if (lat != 0.0 || lng != 0.0) {
+            d("filePath = $filePath")
             // Column name is same for image and video
             val values = ContentValues()
             values.put(MediaStore.Images.ImageColumns.LATITUDE, lat)
@@ -192,14 +195,34 @@ class MediaIntentService : JobIntentService(), DokiLog {
         }
     }
 
+    // copyLatLng
+    private fun copyLatLng(filePath: String) {
+        val fileAction = fileActionDao.get(filePath)
+        if (fileAction != null &&
+            fileAction.action == ACTION_ADD &&
+            (fileAction.lat != 0.0 || fileAction.lng != 0.0)
+        ) {
+            updateLatLng(filePath, fileAction.lat, fileAction.lng)
+        }
+    }
+
     // scanMedia
     private fun scanMedia(filePaths: List<String>) {
         MediaScannerConnection.scanFile(applicationContext, filePaths.toTypedArray(), null) { filePath, uri ->
             d("filePath = $filePath, uri = ${uri ?: "deleted"}")
-            if (uri != null && filePath.endsWith(dummyFileName)) {
-                // Dummy file is created. Delete it and scan again.
-                File(filePath).delete()
-                scanMedia(listOf(filePath))
+            if (uri != null) {
+                when {
+                    // If moving video, scanFile cannot add the gps information since it is not in the media container.
+                    // Try to copy from FileAction if possible.
+                    PholderTagUtil.isVideo(filePath) -> {
+                        copyLatLng(filePath)
+                    }
+                    // Dummy file is created. Delete it and scan again.
+                    filePath.endsWith(dummyFileName) -> {
+                        File(filePath).delete()
+                        scanMedia(listOf(filePath))
+                    }
+                }
             }
         }
     }

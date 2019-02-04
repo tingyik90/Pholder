@@ -116,6 +116,15 @@ abstract class FileActionDao {
         return _getAll()
     }
 
+    // get
+    fun get(filePath: String): FileAction? {
+        return _get(
+            PholderTagUtil.getParentPath(filePath),
+            PholderTagUtil.getFileName(filePath),
+            PholderTagUtil.getExtension(filePath)
+        )
+    }
+
     // update
     fun update(fileActions: List<FileAction>): List<Long> {
         return _update(fileActions)
@@ -133,6 +142,13 @@ abstract class FileActionDao {
 
     @Query("SELECT * FROM FileAction ORDER BY time ASC")
     protected abstract fun _getAll(): List<FileAction>
+
+    @Query(
+        "SELECT * FROM FileAction " +
+                "WHERE parentPath like :parentPath AND fileName = :fileName AND extension = :extension " +
+                "LIMIT 1"
+    )
+    protected abstract fun _get(parentPath: String, fileName: String, extension: String): FileAction?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract fun _update(fileActions: List<FileAction>): List<Long>

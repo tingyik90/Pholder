@@ -2,7 +2,6 @@ package com.dokidevs.pholder.data
 
 import android.content.ContentResolver
 import android.content.Context
-import android.media.MediaScannerConnection
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.room.Database
@@ -673,7 +672,7 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                 folderTagsActual.forEach { folderTagActual ->
                     if (!folderTags.contains(folderTagActual)) {
                         folderTagActual.folderCount =
-                                PholderTagUtil.countActualFolders(folderTagActual.toFile(), excludedFolderPaths)
+                            PholderTagUtil.countActualFolders(folderTagActual.toFile(), excludedFolderPaths)
                         folderTags.add(folderTagActual)
                     }
                 }
@@ -832,11 +831,11 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                     parentFolderTag.folderCount++
                     folderTagDao.update(listOf(parentFolderTag))
                 }
-                dataUpdated()
                 MediaIntentService.scanMediaPaths(
                     applicationContext,
                     listOf(Pair(newFolder.absolutePath, SCAN_ACTION_FOLDER_ADD_THIS))
                 )
+                dataUpdated()
             }
             // Do not perform media scan because this will show the folder as a file instead in MTP
             return isFolderCreated
@@ -848,7 +847,10 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
             val start = System.currentTimeMillis()
             // Add fileTag into database
             val fileTag = FileTag(filePath, -1, true, true)
+            fileTag.lat = lat
+            fileTag.lng = lng
             fileTagDao.update(listOf(fileTag))
+            fileActionDao.update(listOf(FileAction(fileTag, ACTION_ADD, start)))
             // Get parent folderTag
             var folderTag = folderTagDao.get(fileTag.parentPath)
             // Generate based on file in case it was empty and not in db
@@ -877,15 +879,8 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                 }
             }
             folderTagDao.update(newFolderTags)
+            MediaIntentService.scanMediaPaths(applicationContext, listOf(Pair(filePath, SCAN_ACTION_FILE_ADD)))
             dataUpdated()
-            // Register file
-            MediaScannerConnection.scanFile(applicationContext, arrayOf(filePath), null) { path, uri ->
-                d("filePath = $path, uri = $uri")
-                // Add latLng if applicable
-                if (lat != 0.0 && lng != 0.0) {
-                    MediaIntentService.updateLatLng(applicationContext, path, lat, lng)
-                }
-            }
             d("duration = ${System.currentTimeMillis() - start}")
         }
 
@@ -1035,10 +1030,10 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                     }
                 }
                 updateFolderTags()
-                dataUpdated()
                 if (scanPairs.isNotEmpty()) {
                     MediaIntentService.scanMediaPaths(applicationContext, scanPairs)
                 }
+                dataUpdated()
                 d("duration = ${System.currentTimeMillis() - start}")
                 return resultPairs
             } else {
@@ -1150,7 +1145,7 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                                         val newChildFileTag = childFileTag.copy()
                                         newChildFileTag.mediaStoreId = -1L
                                         newChildFileTag.parentPath =
-                                                childFileTag.parentPath.replaceFirst(folderPath, newFile.absolutePath)
+                                            childFileTag.parentPath.replaceFirst(folderPath, newFile.absolutePath)
                                         newChildFileTags.add(newChildFileTag)
                                         // Mark old fileTag as not exist
                                         childFileTag.exist = false
@@ -1182,7 +1177,7 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                                         // Create new tag
                                         val newSubFolderTag = subFolderTag.copy()
                                         newSubFolderTag.parentPath =
-                                                subFolderTag.parentPath.replaceFirst(folderPath, newFile.absolutePath)
+                                            subFolderTag.parentPath.replaceFirst(folderPath, newFile.absolutePath)
                                         newSubFolderTag.lastModified = newFile.lastModified()
                                         newSubFolderTags.add(newSubFolderTag)
                                     }
@@ -1224,10 +1219,10 @@ abstract class PholderDatabase : RoomDatabase(), DokiLog {
                     }
                 }
                 updateFolderTags()
-                dataUpdated()
                 if (scanPairs.isNotEmpty()) {
                     MediaIntentService.scanMediaPaths(applicationContext, scanPairs)
                 }
+                dataUpdated()
                 d("duration = ${System.currentTimeMillis() - start}")
                 return resultPairs
             }
