@@ -109,6 +109,11 @@ abstract class BaseRecyclerViewAdapter<T : BaseRecyclerViewItem, VH : BaseRecycl
         existingViewHolders.remove(holder)
     }
 
+    // getViewHolders
+    fun getViewHolders(): List<VH> {
+        return existingViewHolders.toList()
+    }
+
     // getViewHolder
     fun getViewHolder(uid: String): VH? {
         val viewHolders = existingViewHolders.toList()

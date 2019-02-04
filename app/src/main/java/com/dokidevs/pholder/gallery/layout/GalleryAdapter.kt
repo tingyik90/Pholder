@@ -17,7 +17,6 @@ import com.dokidevs.pholder.data.PholderTag.Companion.TYPE_FILE
 import com.dokidevs.pholder.data.PholderTag.Companion.TYPE_FOLDER
 import com.dokidevs.pholder.data.PholderTagUtil
 import com.dokidevs.pholder.data.TitleTag
-import com.dokidevs.pholder.gallery.GalleryBaseFragment
 import com.michaelflisar.dragselectrecyclerview.DragSelectTouchListener
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -432,14 +431,10 @@ class GalleryAdapter(
         smoothScroll: Boolean,
         onScrollListener: RecyclerView.OnScrollListener? = null
     ): Int {
-        val position = if (scrollToUid == GalleryBaseFragment.SCROLL_TO_TOP) {
-            0
+        val position = if (scrollToUid.isNotEmpty()) {
+            PholderTagUtil.getPholderTagPosition(items, scrollToUid)
         } else {
-            if (scrollToUid.isNotEmpty()) {
-                PholderTagUtil.getPholderTagPosition(items, scrollToUid)
-            } else {
-                -1
-            }
+            -1
         }
         var firstVisible = -1
         var lastVisible = -1

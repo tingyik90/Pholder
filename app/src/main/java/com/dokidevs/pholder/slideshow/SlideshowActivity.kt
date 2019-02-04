@@ -21,7 +21,6 @@ import com.dokidevs.pholder.base.*
 import com.dokidevs.pholder.data.FileTag
 import com.dokidevs.pholder.data.PholderTagUtil
 import com.dokidevs.pholder.dialog.ConfirmationDialog
-import com.dokidevs.pholder.gallery.GalleryBaseFragment
 import com.dokidevs.pholder.info.InfoActivity
 import com.dokidevs.pholder.service.FileIntentService
 import com.dokidevs.pholder.utils.*
@@ -46,6 +45,9 @@ class SlideshowActivity :
         /* intents */
         private const val INITIAL_FILE_PATH = "INITIAL_FILE_PATH"
         private const val MAP_KEY = "MAP_KEY"
+
+        /* results */
+        const val FROM_SLIDESHOW_FILE_PATH = "FROM_SLIDESHOW_FILE_PATH"
 
         /* map */
         private val fileTagMap = HashMap<String, List<FileTag>>()
@@ -190,7 +192,7 @@ class SlideshowActivity :
         lockableViewPager.adapter = slideshowAdapter
         lockableViewPager.pageMargin = resources.getDimension(R.dimen.slideshow_margin_page).toInt()
         // Initiate file position
-        resultIntent.putExtra(GalleryBaseFragment.SCROLL_TO_UID, currentFilePath)
+        resultIntent.putExtra(FROM_SLIDESHOW_FILE_PATH, currentFilePath)
         currentItem = PholderTagUtil.getPholderTagPosition(fileTags, currentFilePath)
         if (currentItem < 0) currentItem = 0
         lockableViewPager.currentItem = currentItem
@@ -235,7 +237,7 @@ class SlideshowActivity :
                     if (currentFragment != null) {
                         currentFragment.onSelected()
                         setViewsToMove(currentFragment)
-                        resultIntent.putExtra(GalleryBaseFragment.SCROLL_TO_UID, currentFragment.getFilePath())
+                        resultIntent.putExtra(FROM_SLIDESHOW_FILE_PATH, currentFragment.getFilePath())
                     }
                 }
             }

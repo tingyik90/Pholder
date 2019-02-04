@@ -38,10 +38,6 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
     /* companion object */
     companion object {
 
-        /* scroll */
-        const val SCROLL_TO_UID = "SCROLL_TO_UID"
-        const val SCROLL_TO_TOP = "SCROLL_TO_TOP"
-
         /* saved instance states */
         private const val SAVED_FOLDER_CLICK_PATH = "SAVED_FOLDER_CLICK_PATH"
 
@@ -390,7 +386,7 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
     protected abstract fun getToolbarTitleName(): String
 
     // onReenterFromSlideshowActivity
-    fun onReenterFromSlideshowActivity(scrollToUid: String) {
+    fun onReenterFromSlideshowActivity(toSlideshowFilePath: String, fromSlideshowFilePath: String) {
         globalLayoutHandler = Handler()
         globalLayoutRunnable = Runnable {
             recyclerView.viewTreeObserver.dispatchOnGlobalLayout()
@@ -402,21 +398,27 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
             override fun onGlobalLayout() {
                 recyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 globalLayoutHandler?.removeCallbacks(globalLayoutRunnable)
-                val viewHolder = galleryAdapter.getViewHolder(scrollToUid)
+                // Show the time and gradient for video that was previously hidden
+                if (toSlideshowFilePath != fromSlideshowFilePath) {
+                    val viewHolder = galleryAdapter.getViewHolder(toSlideshowFilePath)
+                    if (viewHolder != null) {
+                        val itemView = viewHolder.itemView as SlideshowActivity.SlideshowTransitionInterface
+                        itemView.onReenterPreparation()
+                    }
+                }
+                val viewHolder = galleryAdapter.getViewHolder(fromSlideshowFilePath)
                 if (viewHolder != null) {
                     // viewHolder is available, scroll to position
-                    val thumbnailLayout = viewHolder.itemView as SlideshowActivity.SlideshowTransitionInterface
-                    if (PholderTagUtil.isVideo(scrollToUid)) {
-                        thumbnailLayout.onReenterPreparation()
-                    }
+                    val itemView = viewHolder.itemView as SlideshowActivity.SlideshowTransitionInterface
+                    itemView.onReenterPreparation()
                     val onScrollListener = object : RecyclerView.OnScrollListener() {
                         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                            // galleryAdapter.scrollToUid() will call onScrollStateChanged(SCROLL_STATE_IDLE) if no scrolling occurs
+                            // galleryAdapter.fromSlideshowFilePath() will call onScrollStateChanged(SCROLL_STATE_IDLE) if no scrolling occurs
                             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                                 recyclerView.removeOnScrollListener(this)
-                                if (thumbnailLayout.isThumbnailLoadComplete()) {
+                                if (itemView.isThumbnailLoadComplete()) {
                                     // Immediately start transition
-                                    onThumbnailLoadCompleted(thumbnailLayout as View, scrollToUid)
+                                    onThumbnailLoadCompleted(itemView as View, fromSlideshowFilePath)
                                 } else {
                                     // Postpone transition until onThumbnailLoadCompleted
                                 }
@@ -428,8 +430,8 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
                             // This will call onScrolled with dy = 0. See https://stackoverflow.com/a/27830439/3584439
                             if (dy == 0) {
                                 recyclerView.removeOnScrollListener(this)
-                                if (thumbnailLayout.isThumbnailLoadComplete()) {
-                                    onThumbnailLoadCompleted(thumbnailLayout as View, scrollToUid)
+                                if (itemView.isThumbnailLoadComplete()) {
+                                    onThumbnailLoadCompleted(itemView as View, fromSlideshowFilePath)
                                 }
                             }
                         }
@@ -438,10 +440,10 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
                     // Use smoothScroll to ensure onScrollListener is called
                     // onScrollListener might not be called when the view is partially visible and calling scrollToPosition
                     // See https://stackoverflow.com/a/45687986/3584439
-                    galleryAdapter.scrollToUid(scrollToUid, true, onScrollListener)
+                    galleryAdapter.scrollToUid(fromSlideshowFilePath, true, onScrollListener)
                 } else {
                     // viewHolder not available, scroll to position and postpone transition until onThumbnailLoadCompleted
-                    val itemPosition = galleryAdapter.scrollToUid(scrollToUid, false)
+                    val itemPosition = galleryAdapter.scrollToUid(fromSlideshowFilePath, false)
                     // In case activity is destroyed or item is not available, force transition to start to avoid app hanging
                     if (itemPosition < 0) {
                         fragmentListener?.cancelSlideshowBackTransition()
@@ -467,15 +469,10 @@ abstract class GalleryBaseFragment : BaseFragment(), GalleryAdapter.GalleryAdapt
             val newItems = generateItems()
             uiThread {
                 if (newItems != null) {
-                    val scrollToUidUpdated = if (newItems.isNotEmpty() && scrollToUid == SCROLL_TO_TOP) {
-                        newItems[0].getUid()
-                    } else {
-                        scrollToUid
-                    }
                     galleryAdapter.updateItems(
                         newItems,
                         calculateDiff,
-                        scrollToUidUpdated,
+                        scrollToUid,
                         smoothScroll,
                         highlightItem
                     )

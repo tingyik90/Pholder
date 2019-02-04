@@ -33,7 +33,8 @@ abstract class GalleryBaseActivity :
     protected var width = 0
     private var isInSlideshowBackTransition = false
     private var isSlideshowStarted = false
-    private var slideshowSharedElementUid = ""
+    private var toSlideshowFilePath = ""
+    private var fromSlideshowFilePath = ""
     private var sharedElementCallback = BaseSharedElementCallback()
 
     // onCreateAction
@@ -79,6 +80,7 @@ abstract class GalleryBaseActivity :
             val file = File(initialFilePath)
             if (file.exists()) {
                 isSlideshowStarted = true
+                toSlideshowFilePath = initialFilePath
                 startSlideshowPreparation(initialFilePath, view, fileTags)
                 val intent = SlideshowActivity.newIntent(this, initialFilePath, fileTags)
                 val pair = mutableListOf<androidx.core.util.Pair<View, String>>()
@@ -112,9 +114,9 @@ abstract class GalleryBaseActivity :
 
     // onReenterFromSlideshowActivity
     override fun onActivityReenter(resultCode: Int, data: Intent?) {
-        slideshowSharedElementUid = data?.getStringExtra(GalleryBaseFragment.SCROLL_TO_UID) ?: ""
-        d("slideshowSharedElementUid = $slideshowSharedElementUid")
-        if (slideshowSharedElementUid.isNotEmpty()) {
+        fromSlideshowFilePath = data?.getStringExtra(SlideshowActivity.FROM_SLIDESHOW_FILE_PATH) ?: ""
+        d("fromSlideshowFilePath = $fromSlideshowFilePath")
+        if (fromSlideshowFilePath.isNotEmpty()) {
             isInSlideshowBackTransition = true
             sharedElementCallback = BaseSharedElementCallback()
             setExitSharedElementCallback(sharedElementCallback)
@@ -123,7 +125,10 @@ abstract class GalleryBaseActivity :
             val oldWidth = width
             width = getScreenWidth()
             if (oldWidth == width) {
-                getCurrentGalleryBaseFragment()?.onReenterFromSlideshowActivity(slideshowSharedElementUid)
+                getCurrentGalleryBaseFragment()?.onReenterFromSlideshowActivity(
+                    toSlideshowFilePath,
+                    fromSlideshowFilePath
+                )
             } else {
                 // Do nothing and only proceed after onConfigurationChanged has updated recyclerView
             }
@@ -151,7 +156,7 @@ abstract class GalleryBaseActivity :
     override fun onThumbnailLoadCompleted(fragment: GalleryBaseFragment, view: View, filePath: String) {
         // Start transition if required
         if (isInSlideshowBackTransition) {
-            if (filePath == slideshowSharedElementUid) {
+            if (filePath == fromSlideshowFilePath) {
                 d(filePath)
                 view as SlideshowActivity.SlideshowTransitionInterface
                 startSlideshowBackTransition(view.onReenterRequiredSharedElements())
@@ -162,7 +167,8 @@ abstract class GalleryBaseActivity :
     // startSlideshowBackTransition
     private fun startSlideshowBackTransition(fragmentSharedElements: List<View>) {
         isInSlideshowBackTransition = false
-        slideshowSharedElementUid = ""
+        toSlideshowFilePath = ""
+        fromSlideshowFilePath = ""
         // Update sharedElements, supplement other sharedElements if required
         window.sharedElementReenterTransition.addListener(object : BaseTransitionListener() {
             override fun onTransitionStart(transition: Transition) {
@@ -211,8 +217,8 @@ abstract class GalleryBaseActivity :
                 // With transition, back navigation will call onActivityReenter -> onStart -> onActivityResult
                 // Without transition, typical back navigation will call onActivityResult -> onStart
                 // In case finishAfterTransition is not called and called finish directly
-                val scrollToUid = data?.getStringExtra(GalleryBaseFragment.SCROLL_TO_UID) ?: ""
-                if (scrollToUid.isEmpty()) {
+                val fromSlideshowFilePath = data?.getStringExtra(SlideshowActivity.FROM_SLIDESHOW_FILE_PATH) ?: ""
+                if (fromSlideshowFilePath.isEmpty()) {
                     ActivityCompat.setExitSharedElementCallback(this@GalleryBaseActivity, null)
                     postSlideshowBackTransition()
                 }
@@ -235,7 +241,7 @@ abstract class GalleryBaseActivity :
         super.onConfigurationChanged(newConfig)
         width = getScreenWidth()
         if (isInSlideshowBackTransition) {
-            getCurrentGalleryBaseFragment()?.onReenterFromSlideshowActivity(slideshowSharedElementUid)
+            getCurrentGalleryBaseFragment()?.onReenterFromSlideshowActivity(toSlideshowFilePath, fromSlideshowFilePath)
         }
     }
 

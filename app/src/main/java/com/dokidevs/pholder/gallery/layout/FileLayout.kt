@@ -86,6 +86,9 @@ class FileLayout :
         play.isVisible = isVideo
         time.isVisible = isVideo
         time.text = PholderTagUtil.videoMillisToDuration(fileTag.duration)
+        // Ensure they show in case the alpha is retained as 0f during slideshow
+        time.alpha = 1f
+        bottomGradient.alpha = 1f
     }
 
     // setSelected
