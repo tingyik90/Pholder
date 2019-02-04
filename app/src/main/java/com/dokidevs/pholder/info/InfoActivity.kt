@@ -178,17 +178,19 @@ class InfoActivity : BaseActivity(), OnMapReadyCallback, BaseResultReceiver.Resu
         val lat = resultData.getDouble(GeocoderIntentService.RESULT_LAT, 0.0)
         val lng = resultData.getDouble(GeocoderIntentService.RESULT_LNG, 0.0)
         latLng = LatLng(lat, lng)
-        val address = resultData.getString(GeocoderIntentService.RESULT_ADDRESS, "")
-        val infoSet = InfoListAdapter.InfoSet(R.drawable.ic_place_white_24dp)
-        if (address.isNotEmpty()) {
-            infoSet.textPrimary = address
-            infoSet.textSecondary = "${String.format("%.3f", lat)}, ${String.format("%.3f", lng)}"
-        } else {
-            // No data found, show coordinate only as primary, cancel secondary
-            infoSet.textPrimary = "${String.format("%.3f", lat)}, ${String.format("%.3f", lng)}"
+        if (lat != 0.0 || lng != 0.0) {
+            val address = resultData.getString(GeocoderIntentService.RESULT_ADDRESS, "")
+            val infoSet = InfoListAdapter.InfoSet(R.drawable.ic_place_white_24dp)
+            if (address.isNotEmpty()) {
+                infoSet.textPrimary = address
+                infoSet.textSecondary = "${String.format("%.3f", lat)}, ${String.format("%.3f", lng)}"
+            } else {
+                // No data found, show coordinate only as primary, cancel secondary
+                infoSet.textPrimary = "${String.format("%.3f", lat)}, ${String.format("%.3f", lng)}"
+            }
+            adapter.addInfo(infoSet, true)
+            setMap()
         }
-        adapter.addInfo(infoSet, true)
-        setMap()
     }
 
     // setMap
